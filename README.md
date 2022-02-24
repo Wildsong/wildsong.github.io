@@ -11,9 +11,22 @@ and https://www.wildsong.biz/
 This command will run a Jekyll server.
 See http://localhost:4000/
 
-docker run --rm \
-  --volume="$PWD:/srv/jekyll" \
-  --publish [::1]:4000:4000 \
-  jekyll/jekyll \
-  jekyll serve
+Create boilerplate (for new projects only)
 
+```bash
+export REPO="$USERPROFILE/source/repos/wildsong.github.io"
+docker run --rm --name=jekyll --volume="$REPO:/srv/jekyll" jekyll/jekyll jekyll new website
+```
+
+Run a test server, with hot reload
+
+```bash
+export REPO="$USERPROFILE/source/repos/wildsong.github.io"
+docker run --rm --name=jekyll \
+  --volume="$REPO:/srv/jekyll" \
+  --publish 4000:4000 \
+  jekyll/jekyll \
+  jekyll serve --incremental
+```
+
+(Do I want --incremental?)
